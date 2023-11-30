@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NewJobs.Object;
 
-namespace NewJobs
+namespace NewJobs.Helpers
 {
     internal class MainHelper
     {
-        
 
-        public static void GetBalans()=>Menu.Balans = InputHelper.ReadNumber("Введите свой баланс");
+
+        public static void GetBalans() => Menu.Balans = InputHelper.ReadNumber("Введите свой баланс");
 
         public static void ShowMenu()
         {
@@ -21,7 +22,7 @@ namespace NewJobs
             do
             {
                 PrintFirst("Главная");
-                Console.WriteLine("Баланс:"+Menu.Balans);
+                Console.WriteLine("Баланс:" + Menu.Balans);
                 Console.WriteLine();
 
                 for (int NumberCinema = 0; NumberCinema < options.Count; NumberCinema++)
@@ -71,7 +72,7 @@ namespace NewJobs
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.White;
                     }
-                    PrintCinema(menuItems,NumberCinema);
+                    PrintCinema(menuItems, NumberCinema);
 
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Black;
@@ -83,14 +84,14 @@ namespace NewJobs
                 if (keyInfo.Key == ConsoleKey.DownArrow) { number = (number + 1) % menuItems.Count(); }
 
                 if (keyInfo.Key == ConsoleKey.Enter)
-                { 
-                SetTicket(menuItems, number,Menu.Balans);
+                {
+                    SetTicket(menuItems, number, Menu.Balans);
                 }
 
             } while (keyInfo.Key != ConsoleKey.Escape);
         }
 
-        
+
 
         public static void ShowPostersSoon()
         {
@@ -136,7 +137,7 @@ namespace NewJobs
             List<Cinema> menuItems = Menu.Ticket;
             do
             {
-                
+
 
                 int NumberCinema = 0;
 
@@ -168,33 +169,33 @@ namespace NewJobs
             } while (keyInfo.Key != ConsoleKey.Escape);
         }
 
-        public static void SetTicket(List<Cinema> menuItems, int cinemaNumber,int? balans)
+        public static void SetTicket(List<Cinema> menuItems, int cinemaNumber, int? balans)
         {
             if (balans >= menuItems[cinemaNumber].Price)
             {
-                
-                Menu.Ticket.Add( menuItems[cinemaNumber] );
-                Menu.Balans-= menuItems[cinemaNumber].Price;
+
+                Menu.Ticket.Add(menuItems[cinemaNumber]);
+                Menu.Balans -= menuItems[cinemaNumber].Price;
             }
         }
 
 
-        public static void PrintCinema (List<Cinema> menuItems, int CinemaNumber)
+        public static void PrintCinema(List<Cinema> menuItems, int CinemaNumber)
         {
-            Console.WriteLine("\n"+menuItems[CinemaNumber].Title);
-            Console.WriteLine("Описание:"+menuItems[CinemaNumber].Description);
-            Console.WriteLine("Дата:"+menuItems[CinemaNumber].Time);
-            Console.WriteLine("Цена:"+menuItems[CinemaNumber].Price);
+            Console.WriteLine("\n" + menuItems[CinemaNumber].Title);
+            Console.WriteLine("Описание:" + menuItems[CinemaNumber].Description);
+            Console.WriteLine("Дата:" + menuItems[CinemaNumber].Time);
+            Console.WriteLine("Цена:" + menuItems[CinemaNumber].Price);
 
         }
-        public static void PrintFirst (string? name)
+        public static void PrintFirst(string? name)
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine($"      {name}      \n");
             Console.BackgroundColor = ConsoleColor.Black;
         }
-        
+
 
     }
 }
